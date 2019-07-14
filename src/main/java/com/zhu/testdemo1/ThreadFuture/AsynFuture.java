@@ -26,7 +26,7 @@ public class AsynFuture<T>  implements future<T> {
 
     @Override
     public T get() throws InterruptedException {
-        //  若任务没完成  让线程阻塞
+        //  若任务没完成  释放锁资源 让线程进入 blocked状态
         synchronized (this){
             while(!done){
                 this.wait();

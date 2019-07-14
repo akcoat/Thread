@@ -4,6 +4,8 @@ import com.zhu.testdemo1.ThreadFuture.AsynFuture;
 import com.zhu.testdemo1.ThreadFuture.FutureTask;
 import com.zhu.testdemo1.ThreadFuture.future;
 
+import java.util.function.Consumer;
+
 /**
  * 　　* @description: ${name}
  * 　　* @param ${tags}
@@ -28,4 +30,17 @@ public class FutureService
         return asynFuture;
     }
 
+
+    public <T> future<T> submit(final FutureTask<T> task, Consumer<T> consumer){
+        AsynFuture<T> asynFuture  = new AsynFuture<>();
+        new Thread(){
+            @Override
+            public void run() {
+                T t =  task.call();
+                asynFuture.done(t);
+                consumer.accept(t);
+            }
+        }.start();
+        return asynFuture;
+    }
 }
