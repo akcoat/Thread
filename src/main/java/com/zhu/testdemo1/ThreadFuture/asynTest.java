@@ -23,6 +23,8 @@ public class asynTest
                 e.printStackTrace();
             }
             return "finished";
+        },(t)->{
+           System.out.println(t);
         });
         try {
             Thread.sleep(1_000);
@@ -30,7 +32,7 @@ public class asynTest
             e.printStackTrace();
         }
         System.out.println("----------------------------");
-        System.out.println(submit.get());
+      //  System.out.println(submit.get());
 
     }
 

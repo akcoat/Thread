@@ -15,6 +15,8 @@ import java.util.function.Consumer;
  * 　　* @date $date$ $time$
  *
  */
+
+//  将future这个票据与任务结合在一起，降低耦合性
 public class FutureService
 {
 
@@ -38,6 +40,7 @@ public class FutureService
             public void run() {
                 T t =  task.call();
                 asynFuture.done(t);
+                // 在这个任务 结束的时候会回调 consumer的方法  实现回调函数的效果
                 consumer.accept(t);
             }
         }.start();
